@@ -32,54 +32,57 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post("/", (req, res) => {
   Tag.create({
-    tag_name: req.body.tag_name
+    tag_name: req.body.tag_name,
   })
-    .then(data => res.json(data))
-    .catch(err => {
+    .then((data) => res.json(data))
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put("/:id", (req, res) => {
   Tag.update(
     {
-      tag_name: req.body.tag_name
+      tag_name: req.body.tag_name,
     },
     {
       where: {
-        id: req.params.id
-      }
-    })
-    .then(data => {
+        id: req.params.id,
+      },
+    }
+  )
+    .then((data) => {
       if (!data) {
-        res.status(404).json({ message: 'There is no tag found with that ID.' });
+        res
+          .status(404)
+          .json({ message: "There is no tag found with that ID." });
         return;
       }
       res.json(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete("/:id", (req, res) => {
   Tag.destroy({
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
   })
-    .then(data => {
+    .then((data) => {
       if (!data) {
-        res.status(404).json({ message: 'There is no tag found by that ID.' });
+        res.status(404).json({ message: "There is no tag found by that ID." });
         return;
       }
       res.json(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json(err);
     });
